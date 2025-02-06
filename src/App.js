@@ -7,7 +7,8 @@ function App() {
     return savedTodos;
   });
 
-
+  const [editIndex, setEditIndex] = useState(null);
+  const [editText, setEditText] = useState('');
 
   const addTodo = () => {
     if (inputValue.trim() !== '') {
@@ -19,6 +20,19 @@ function App() {
   const deleteTodo = (index) => {
     const updatedTodos = todos.filter((_, i) => i !== index);
     setTodos(updatedTodos);
+  }
+
+  const editTodo = (index) => {
+    setEditIndex(index);
+    setEditText(todos[index]);
+  }
+
+  const saveTodo = (index) => {
+    const updatedTodos = [...todos];
+    updatedTodos[index] = editText;
+    setTodos(updatedTodos);
+    setEditIndex(null);
+    setEditText('');
   }
 
   useEffect(() => {
@@ -39,12 +53,25 @@ function App() {
       <ul>
         {todos.map((todo, index) => (
           <li key={index}>
-            {todo}
-            <button onClick={() => deleteTodo(index)}>Delete</button>
+            {editIndex === index ? (
+              <>
+                <input
+                  type="text"
+                  value={editText}
+                  onChange={(e) => setEditText(e.target.value)}
+                />
+                <button onClick={() => saveTodo(index)}>Save</button>
+              </>
+            ) : (
+              <>
+                {todo}
+                <button onClick={() => editTodo(index)}>Edit</button>
+                <button onClick={() => deleteTodo(index)}>Delete</button>
+              </>
+            )}
           </li>
         ))}
       </ul>
-
     </div>
   );
 }
