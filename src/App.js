@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function App() {
   const [inputValue, setInputValue] = useState('');
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
+    return savedTodos;
+  });
+
+
 
   const addTodo = () => {
     if (inputValue.trim() !== '') {
@@ -15,6 +20,10 @@ function App() {
     const updatedTodos = todos.filter((_, i) => i !== index);
     setTodos(updatedTodos);
   }
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <div>
