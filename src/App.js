@@ -12,28 +12,38 @@ function App() {
 
   const addTodo = () => {
     if (inputValue.trim() !== '') {
-      setTodos([...todos, inputValue]);
+      const newTodo = { text: inputValue, completed: false };
+      // setTodos([...todos, inputValue]);
+      setTodos([...todos, newTodo]);
       setInputValue('');
     }
+  };
+
+  const toggleTodo = (index) => {
+    const updatedTodos = [...todos];
+    updatedTodos[index].completed = !updatedTodos[index].completed;
+    setTodos(updatedTodos);
   };
 
   const deleteTodo = (index) => {
     const updatedTodos = todos.filter((_, i) => i !== index);
     setTodos(updatedTodos);
-  }
+  };
 
   const editTodo = (index) => {
     setEditIndex(index);
-    setEditText(todos[index]);
-  }
+    // setEditText(todos[index]);
+    setEditText(todos[index].text);
+  };
 
   const saveTodo = (index) => {
     const updatedTodos = [...todos];
-    updatedTodos[index] = editText;
+    // updatedTodos[index] = editText;
+    updatedTodos[index] = { ...updatedTodos[index], text: editText };
     setTodos(updatedTodos);
     setEditIndex(null);
     setEditText('');
-  }
+  };
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
@@ -55,7 +65,7 @@ function App() {
       ) : (
         <ul>
           {todos.map((todo, index) => (
-            <li key={index}>
+            <li key={index} style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
               {editIndex === index ? (
                 <>
                   <input
@@ -67,7 +77,7 @@ function App() {
                 </>
               ) : (
                 <>
-                  {todo}
+                  <span onClick={() => toggleTodo(index)}>{todo.text}</span>
                   <button onClick={() => editTodo(index)}>edit</button>
                   <button onClick={() => deleteTodo(index)}>delete</button>
                 </>
@@ -78,6 +88,6 @@ function App() {
       )}
     </div>
   );
-}
+};
 
 export default App;
