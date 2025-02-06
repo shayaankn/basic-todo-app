@@ -48,30 +48,34 @@ function App() {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
-      <button onClick={addTodo}>Add</button>
+      <button onClick={addTodo}>add</button>
 
-      <ul>
-        {todos.map((todo, index) => (
-          <li key={index}>
-            {editIndex === index ? (
-              <>
-                <input
-                  type="text"
-                  value={editText}
-                  onChange={(e) => setEditText(e.target.value)}
-                />
-                <button onClick={() => saveTodo(index)}>Save</button>
-              </>
-            ) : (
-              <>
-                {todo}
-                <button onClick={() => editTodo(index)}>Edit</button>
-                <button onClick={() => deleteTodo(index)}>Delete</button>
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
+      {todos.length === 0 ? (
+        <p>no todos yet!</p>
+      ) : (
+        <ul>
+          {todos.map((todo, index) => (
+            <li key={index}>
+              {editIndex === index ? (
+                <>
+                  <input
+                    type="text"
+                    value={editText}
+                    onChange={(e) => setEditText(e.target.value)}
+                  />
+                  <button onClick={() => saveTodo(index)}>save</button>
+                </>
+              ) : (
+                <>
+                  {todo}
+                  <button onClick={() => editTodo(index)}>edit</button>
+                  <button onClick={() => deleteTodo(index)}>delete</button>
+                </>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
