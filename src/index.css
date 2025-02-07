@@ -1,0 +1,118 @@
+:root {
+    --off-white: #F5F5F5;
+    --ivory: #EDEDED;
+    --light-beige: #D8D8D8;
+    --soft-gray: #B8B8B8;
+    --charcoal: #333333;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--ivory);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.main-div {
+    background: var(--off-white);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 50vw;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .main-div {
+        width: 80vw;
+    }
+}
+
+h1 {
+    color: var(--charcoal);
+    font-size: 2rem;
+    margin-top: .5rem;
+    margin-bottom: 1rem;
+}
+
+.input-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.input-container input {
+    flex-grow: 1;
+    margin-right: 8px;
+}
+
+input {
+    font-size: 1rem;
+    padding: 8px;
+    border: 1px solid var(--soft-gray);
+    border-radius: 4px;
+}
+
+.input-container .add-btn {
+    font-size: 1rem;
+    color: var(--off-white);
+    background-color: var(--charcoal);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.input-container .add-btn:hover {
+    background-color: var(--charcoal);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    color: var(--charcoal);
+    font-size: 1rem;
+    padding: 8px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--soft-gray);
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+span {
+    flex-grow: 1;
+    cursor: pointer;
+    text-align: start;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--charcoal);
+}
+
+button+button {
+    margin-left: 5px;
+}
+
+.edit-btn,
+.delete-btn,
+.save-btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+    color: var(--off-white);
+    background-color: var(--charcoal);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

@@ -13,7 +13,6 @@ function App() {
   const addTodo = () => {
     if (inputValue.trim() !== '') {
       const newTodo = { text: inputValue, completed: false };
-      // setTodos([...todos, inputValue]);
       setTodos([...todos, newTodo]);
       setInputValue('');
     }
@@ -32,13 +31,11 @@ function App() {
 
   const editTodo = (index) => {
     setEditIndex(index);
-    // setEditText(todos[index]);
     setEditText(todos[index].text);
   };
 
   const saveTodo = (index) => {
     const updatedTodos = [...todos];
-    // updatedTodos[index] = editText;
     updatedTodos[index] = { ...updatedTodos[index], text: editText };
     setTodos(updatedTodos);
     setEditIndex(null);
@@ -50,16 +47,17 @@ function App() {
   }, [todos]);
 
   return (
-    <div>
+    <div className='main-div'>
       <h1>basic todo app</h1>
-      <input
-        type="text"
-        placeholder="Enter a todo"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-      <button onClick={addTodo}>add</button>
-
+      <div className="input-container">
+        <input
+          type="text"
+          placeholder=""
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+        <button onClick={addTodo} className='add-btn'>add</button>
+      </div>
       {todos.length === 0 ? (
         <p>no todos yet!</p>
       ) : (
@@ -73,13 +71,13 @@ function App() {
                     value={editText}
                     onChange={(e) => setEditText(e.target.value)}
                   />
-                  <button onClick={() => saveTodo(index)}>save</button>
+                  <button onClick={() => saveTodo(index)} className='save-btn'>save</button>
                 </>
               ) : (
                 <>
                   <span onClick={() => toggleTodo(index)}>{todo.text}</span>
-                  <button onClick={() => editTodo(index)}>edit</button>
-                  <button onClick={() => deleteTodo(index)}>delete</button>
+                  <button onClick={() => editTodo(index)} className='edit-btn'>edit</button>
+                  <button onClick={() => deleteTodo(index)} className='delete-btn'>delete</button>
                 </>
               )}
             </li>
